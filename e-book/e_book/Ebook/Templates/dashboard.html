@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hi </title>
+    <style>
+		table, th, td {
+		  border: 1px solid black;
+		}
+		td{
+			text-align:center;
+		}
+		</style>
+</head>
+<body>
+    <form method="post" action="/upload/" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Book Name:</label><input type="text" name="book_name" value="{{source.book_name}}"><br>
+        <label>Author Name:</label><input type="text" name="book_auth_name" value="{{source.book_auth_name}}"><br>
+        <label>Category:</label><input type="text" name="book_cat" value="{{source.book_cat}}"><br>
+        <label>No Of Pages:</label><input type="text" name="book_no_of_pages" value="{{source.book_no_of_pages}}"><br>
+        <label>Tags:</label><input type="text" name="book_tags" value="{{source.book_tags}}"><br>
+        <label>public:</label><input type="checkbox" name="book_public_true" value="{{source.book_public_true}}"><br>
+        <input type="file" name="document">
+        <button type="submit">Upload File</button>
+    </form>
+
+    {% if books %}
+        <table style="width:100%">
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Author Name</th>
+                <th>NO. Of Pages</th>
+                <th>Tags</th>
+
+              </tr>
+            {% for book in books %}
+                <tr>
+                    <td>{{book.id}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.category}}</td>
+                    <td>{{book.author_name}}</td>
+                    <td>{{book.no_of_pages}}</td>
+                    <td>{{book.tags}}</td>
+                    <td><input type="button" value="Download" class="delete_person" id= "{{book.id}}">
+                </tr>
+            {% endfor %}
+            </table>
+    {% endif %}
+</body>
+</html>

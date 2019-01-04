@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    {% load staticfiles %}
+		<script src="{% static 'js/jquery-1.11.2.min.js' %}"></script>
+    <style>
+		table, th, td {
+		  border: 1px solid black;
+		}
+		td{
+			text-align:center;
+		}
+		</style>
+</head>
+<body>
+    <h2>Hi welcome to E-book</h2>
+    <button><a  href="/signup/">SignUp</a></button>
+    <button><a  href="/signin/">SignIn</a></button><br>
+    {% if books %}
+        <table style="width:100%">
+              <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Author Name</th>
+                <th>NO. Of Pages</th>
+                <th>Tags</th>
+
+              </tr>
+            {% for book in books %}
+                <tr>
+                    <td>{{book.id}}</td>
+                    <td>{{book.name}}</td>
+                    <td>{{book.category}}</td>
+                    <td>{{book.author_name}}</td>
+                    <td>{{book.no_of_pages}}</td>
+                    <td>{{book.tags}}</td>
+                    <td><input type="button" value="Download" class="delete_person" id= "{{book.id}}">
+                </tr>
+            {% endfor %}
+            </table>
+    {% endif %}
+</body>
+</html>
